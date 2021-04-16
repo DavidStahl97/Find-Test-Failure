@@ -1,0 +1,15 @@
+﻿<MudDialog>
+    <DialogContent>
+        <div class="ma-5">
+            <p class="mb-5">Do you really want to delete the UI Page?</p>
+            <div class="d-flex justify-start">
+                <MudField Label="Name" Variant="Variant.Text">@UIPage.Name</MudField>
+                <MudToolBarSpacer />
+            </div>
+        </div>
+    </DialogContent>
+    <DialogActions>
+        <MudButton Color="Color.Primary"
+                   OnClick="Delete">Delete</MudButton>
+    </DialogActions>
+</MudDialog>

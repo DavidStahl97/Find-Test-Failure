@@ -1,0 +1,42 @@
+﻿@namespace TestFramework.Client.Components
+
+@typeparam TItem
+
+<Pagination SearchFunction="SearchFunction"
+            @ref="_pagination"
+            ShowSearch="ShowSearch">
+    <Content>
+        <MudTable T="TItem"
+                  Items="@context"
+                  Hover="true"
+                  SelectedItemChanged="SelectedItemChanged"
+                  MultiSelection="MultiSelection"
+                  SelectedItemsChanged="SelectedItemsChanged">
+            <ColGroup>
+                @ColumnGroup
+            </ColGroup>
+            <HeaderContent>
+                @Header
+            </HeaderContent>
+            <RowTemplate Context="item">
+                @RowTemplate(item)
+            </RowTemplate>
+        </MudTable>
+    </Content>
+    <SkeletonContent>
+        <MudTable T="int"
+                  Hover="true"
+                  Items="Enumerable.Range(0, 10)"
+                  MultiSelection="MultiSelection">
+            <ColGroup>
+                @ColumnGroup
+            </ColGroup>
+            <HeaderContent>
+                @Header
+            </HeaderContent>
+            <RowTemplate Context="item">
+                @SkeletonRow
+            </RowTemplate>
+        </MudTable>
+    </SkeletonContent>
+</Pagination>

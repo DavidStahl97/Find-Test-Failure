@@ -1,0 +1,107 @@
+name: Testing
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+      - release
+
+jobs:  
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.x
+    
+    - name: Packages Cach
+      uses: actions/cache@v2
+      with:
+        path: ~/.nuget/packages
+        # Look to see if there is a cache hit for the corresponding requirements file
+        key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-nuget
+    
+    - name: Restore dependencies
+      run: dotnet restore TestFramework.sln  
+      
+    - name: Build
+      run: dotnet build TestFramework.sln --no-restore -c Release            
+      
+    - name: Cache Build
+      uses: actions/cache@v2
+      id: restore-build
+      with:
+        path: ./*
+        key: ${{ github.sha }}-build
+    
+  unit-tests:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:         
+    - uses: actions/checkout@v2    
+    
+    - name: Cache Build
+      uses: actions/cache@v2
+      id: restore-build
+      with:
+        path: ./*
+        key: ${{ github.sha }}-build
+        
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.x       
+        
+    - uses: actions/upload-artifact@v2
+      with:
+        name: nextjs-build
+        path: ./*        
+        
+    - run: cd tests/TestFramework.UnitTests/bin/Release/net5.0 ; ls
+        
+    - name: Run Unit-Tests
+      run: dotnet test tests/TestFramework.UnitTests/TestFramework.UnitTests.csproj /p:CollectCoverage=true --no-build --verbosity normal -c Release
+      
+  integration-tests:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2                                  
+      
+      - name: Pull Docker Images
+        run: docker-compose -f docker-compose.yml pull        
+      
+      - name: Build TestFramework.WebApi
+        run: docker build -t davidstahl97/testframework-webapi .
+        
+      - name: Build TestWebApp
+        run: docker build -t davidstahl97/testwebapp -f tests/TestFramework.TestWebApp/Dockerfile .
+           
+      - name: Docker-Compose Up
+        run: >
+          docker-compose 
+          -f docker-compose.yml 
+          -f docker-compose.testframework.yml
+          -f docker-compose.testframework.release.yml
+          -f docker-compose.testwebapp.yml
+          --project-name testframework-integrationtests
+          up --detach
+      
+      - name: Cache Build
+        uses: actions/cache@v2
+        id: restore-build
+        with:
+          path: ./*
+          key: ${{ github.sha }}-build  
+      
+      - name: Run Integration Tests
+        run: dotnet test tests/TestFramework.IntegrationTests/TestFramework.IntegrationTests.csproj /p:CollectCoverage=true --no-build --verbosity normal

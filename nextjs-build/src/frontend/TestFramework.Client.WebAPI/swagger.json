@@ -1,0 +1,3577 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "TestFramework.WebAPI",
+    "version": "1.0"
+  },
+  "paths": {
+    "/api/Files": {
+      "get": {
+        "tags": [
+          "Files"
+        ],
+        "operationId": "GetUserFilePage",
+        "parameters": [
+          {
+            "name": "pageIndex",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetUserFileDtoPaginationResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetUserFileDtoPaginationResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetUserFileDtoPaginationResult"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Client Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCodesResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCodesResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCodesResult"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Files"
+        ],
+        "operationId": "PostUserFile",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "files": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "binary"
+                    }
+                  }
+                }
+              },
+              "encoding": {
+                "files": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Files/{id}": {
+      "delete": {
+        "tags": [
+          "Files"
+        ],
+        "operationId": "DeleteUserFile",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "422": {
+            "description": "Client Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCodesResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCodesResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCodesResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/HealthChecks": {
+      "get": {
+        "tags": [
+          "HealthChecks"
+        ],
+        "operationId": "GetHealthCheckPageAsync",
+        "parameters": [
+          {
+            "name": "pageIndex",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetHealthCheckDtoPaginationResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetHealthCheckDtoPaginationResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetHealthCheckDtoPaginationResult"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Client Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCodesResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCodesResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCodesResult"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "HealthChecks"
+        ],
+        "operationId": "PostHealthCheck",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangeOrCreateHealthCheckDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangeOrCreateHealthCheckDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangeOrCreateHealthCheckDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Client Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCodesResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCodesResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCodesResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/HealthChecks/{id}": {
+      "put": {
+        "tags": [
+          "HealthChecks"
+        ],
+        "operationId": "PutHealthCheck",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangeOrCreateHealthCheckDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangeOrCreateHealthCheckDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangeOrCreateHealthCheckDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Client Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCodesResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCodesResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCodesResult"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "HealthChecks"
+        ],
+        "operationId": "DeleteHealthCheck",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "422": {
+            "description": "Client Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCodesResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCodesResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCodesResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/UIElements/{id}": {
+      "get": {
+        "tags": [
+          "UIElements"
+        ],
+        "operationId": "GetUIElementById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "422": {
+            "description": "Client Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCodesResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCodesResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCodesResult"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetUIElementDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetUIElementDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetUIElementDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "UIElements"
+        ],
+        "operationId": "PutUIElement",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangeOrCreateUIElemenDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangeOrCreateUIElemenDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangeOrCreateUIElemenDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "422": {
+            "description": "Client Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCodesResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCodesResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCodesResult"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "UIElements"
+        ],
+        "operationId": "DeleteUIElement",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "422": {
+            "description": "Client Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCodesResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCodesResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCodesResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/UIElements": {
+      "get": {
+        "tags": [
+          "UIElements"
+        ],
+        "operationId": "GetUIElementPage",
+        "parameters": [
+          {
+            "name": "pageIndex",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetUIElementDtoPaginationResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetUIElementDtoPaginationResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetUIElementDtoPaginationResult"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Client Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCodesResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCodesResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCodesResult"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "UIElements"
+        ],
+        "operationId": "PostUIElement",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangeOrCreateUIElemenDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangeOrCreateUIElemenDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangeOrCreateUIElemenDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Client Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCodesResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCodesResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCodesResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/UIPages/UIElements": {
+      "get": {
+        "tags": [
+          "UIPages"
+        ],
+        "operationId": "GetAllPages",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetAllPageDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetAllPageDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetAllPageDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/UIPages/{id}": {
+      "get": {
+        "tags": [
+          "UIPages"
+        ],
+        "operationId": "GetUIPageById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetUIPageDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetUIPageDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetUIPageDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "UIPages"
+        ],
+        "operationId": "PutUIPage",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangeOrCreateUIPageDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangeOrCreateUIPageDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangeOrCreateUIPageDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Client Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCodesResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCodesResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCodesResult"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "UIPages"
+        ],
+        "operationId": "DeleteUIPage",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "422": {
+            "description": "Client Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCodesResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCodesResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCodesResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/UIPages": {
+      "get": {
+        "tags": [
+          "UIPages"
+        ],
+        "operationId": "GetUIPage",
+        "parameters": [
+          {
+            "name": "pageIndex",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetUIPageDtoPaginationResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetUIPageDtoPaginationResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetUIPageDtoPaginationResult"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Client Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCodesResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCodesResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCodesResult"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "UIPages"
+        ],
+        "operationId": "PostUIPage",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangeOrCreateUIPageDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangeOrCreateUIPageDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangeOrCreateUIPageDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Client Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCodesResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCodesResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCodesResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/UIPages/{id}/UIElements": {
+      "get": {
+        "tags": [
+          "UIPages"
+        ],
+        "operationId": "GetUIPageDetails",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "pageIndex",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetUIPageDetailsDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetUIPageDetailsDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetUIPageDetailsDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/UITestCases": {
+      "get": {
+        "tags": [
+          "UITestCases"
+        ],
+        "operationId": "GetUITestPage",
+        "parameters": [
+          {
+            "name": "pageIndex",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetUITestCaseDtoPaginationResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetUITestCaseDtoPaginationResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetUITestCaseDtoPaginationResult"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Client Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCodesResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCodesResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCodesResult"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "UITestCases"
+        ],
+        "operationId": "PostUITestCase",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangeOrCreateUITestCaseDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangeOrCreateUITestCaseDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangeOrCreateUITestCaseDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Client Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCodesResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCodesResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCodesResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/UITestCases/{id}": {
+      "get": {
+        "tags": [
+          "UITestCases"
+        ],
+        "operationId": "GetUITestDetails",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetUITestCaseDetailsDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetUITestCaseDetailsDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetUITestCaseDetailsDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Client Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCodesResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCodesResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCodesResult"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "UITestCases"
+        ],
+        "operationId": "PutUITestCase",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangeOrCreateUITestCaseDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangeOrCreateUITestCaseDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangeOrCreateUITestCaseDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Client Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCodesResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCodesResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCodesResult"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "UITestCases"
+        ],
+        "operationId": "DeleteTestCase",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "422": {
+            "description": "Client Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCodesResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCodesResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCodesResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/UITestCases/{id}/UIEvents": {
+      "put": {
+        "tags": [
+          "UITestCases"
+        ],
+        "operationId": "PutUITestCaseEvents",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEventsDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEventsDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEventsDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Client Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCodesResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCodesResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCodesResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/UITestCaseStatusInfo": {
+      "get": {
+        "tags": [
+          "UITestCaseStatusInfo"
+        ],
+        "operationId": "GetTestCasesStatusInfos",
+        "parameters": [
+          {
+            "name": "start",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "end",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TestCasesStatusInfo"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TestCasesStatusInfo"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TestCasesStatusInfo"
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Client Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCodesResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCodesResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCodesResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/UITestRunCases/{id}/Events": {
+      "get": {
+        "tags": [
+          "UITestRunCases"
+        ],
+        "operationId": "GetUITestRunCaseDetails",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetUITestRunCaseDetailsDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetUITestRunCaseDetailsDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetUITestRunCaseDetailsDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Client Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCodesResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCodesResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCodesResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/UITestRuns": {
+      "post": {
+        "tags": [
+          "UITestRuns"
+        ],
+        "operationId": "PostTestRun",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostUITestRunDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostUITestRunDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostUITestRunDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Client Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCodesResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCodesResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCodesResult"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "UITestRuns"
+        ],
+        "operationId": "GetUITestRunDto",
+        "parameters": [
+          {
+            "name": "pageIndex",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetUITestRunDtoPaginationResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetUITestRunDtoPaginationResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetUITestRunDtoPaginationResult"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Client Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCodesResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCodesResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCodesResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/UITestRuns/{id}/TestCases": {
+      "get": {
+        "tags": [
+          "UITestRuns"
+        ],
+        "operationId": "GetUITestRunCases",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetUITestRunCasesDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetUITestRunCasesDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetUITestRunCasesDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ValidationProblemDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProblemDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ValidationProblemDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Client Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCodesResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCodesResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCodesResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ChangeOrCreateHealthCheckDto": {
+        "type": "object",
+        "properties": {
+          "Name": {
+            "type": "string",
+            "nullable": true
+          },
+          "Url": {
+            "type": "string",
+            "format": "uri",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ChangeOrCreateUIElemenDto": {
+        "type": "object",
+        "properties": {
+          "Name": {
+            "type": "string",
+            "nullable": true
+          },
+          "FindByMethod": {
+            "enum": [
+              "ById",
+              "ByClass",
+              "ByXPath"
+            ],
+            "type": "string"
+          },
+          "FindBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "PageId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ChangeOrCreateUIPageDto": {
+        "type": "object",
+        "properties": {
+          "Name": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ChangeOrCreateUITestCaseDto": {
+        "type": "object",
+        "properties": {
+          "Name": {
+            "type": "string",
+            "nullable": true
+          },
+          "StartUrl": {
+            "type": "string",
+            "format": "uri",
+            "nullable": true
+          },
+          "DefaultWaitForUIElement": {
+            "type": "string",
+            "format": "time-span",
+            "example": "00:00:00"
+          },
+          "RunsPeriodically": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ErrorCodesResult": {
+        "type": "object",
+        "properties": {
+          "ErrorCodes": {
+            "type": "array",
+            "items": {
+              "enum": [
+                "IdLessThen1",
+                "UIElements_NameMaxLength",
+                "UIElements_NameIsEmpty",
+                "UIElements_NameAlreadyUsed",
+                "UIElements_FindByIsEmpty",
+                "UIElements_FindByMaxLength",
+                "UITestCases_NameMaxLength",
+                "UITestCases_NameIsEmpty",
+                "UITestCases_NameAreadyUsed",
+                "UITestCases_StartUrlIsEmpty",
+                "UITestCases_UIElementNotFound",
+                "UITestCases_UserFilesNotFound",
+                "UITestCases_StepsAreNotUnique",
+                "UIEvents_NameIsEmtpy",
+                "UIEvents_NameMaxLength",
+                "UITestRuns_TestCasesNotFound",
+                "UITestRuns_TestCasesAreEmpty",
+                "UIPages_NameIsEmpty",
+                "UIPages_NameMaxLength",
+                "UITestCaseStatusInfo_StartIsEmpty",
+                "UITestCaseStatusInfo_EndIsEmpty",
+                "UITestCaseStatusInfo_EndLessThenStart",
+                "HealthChecks_NameIsEmpty",
+                "HealthChecks_NameMaxLength",
+                "HealthChecks_UriIsEmpty",
+                "UserFiles_FileNameIsEmpty",
+                "UserFiles_FileSizeIsNegative",
+                "UserFiles_FileNameMaxLength",
+                "PageIndexLessThan0",
+                "PageSizeLessThen1",
+                "DeletionFailed"
+              ],
+              "type": "string"
+            },
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetAllPageDto": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "Name": {
+            "type": "string",
+            "nullable": true
+          },
+          "UIElements": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetAllUIElementDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetAllUIElementDto": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "Name": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetClearContentEventDto": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/GetUIElementEventDto"
+          }
+        ],
+        "additionalProperties": false
+      },
+      "GetClickAtPositionEventDto": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/GetUIEventDto"
+          }
+        ],
+        "additionalProperties": false
+      },
+      "GetClickEventDto": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/GetUIElementEventDto"
+          }
+        ],
+        "additionalProperties": false
+      },
+      "GetHealthCheckDto": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "Name": {
+            "type": "string",
+            "nullable": true
+          },
+          "Url": {
+            "type": "string",
+            "format": "uri",
+            "nullable": true
+          },
+          "Healthy": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetHealthCheckDtoPaginationResult": {
+        "type": "object",
+        "properties": {
+          "Count": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "Data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetHealthCheckDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetImportFileEventDto": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/GetUIElementEventDto"
+          }
+        ],
+        "properties": {
+          "UserFile": {
+            "$ref": "#/components/schemas/GetUserFileDto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetMoveByOffsetEventDto": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/GetUIEventDto"
+          }
+        ],
+        "properties": {
+          "OffsetX": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "OffsetY": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetMoveToUIElementEventDto": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/GetUIElementEventDto"
+          }
+        ],
+        "additionalProperties": false
+      },
+      "GetUIElementDto": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "Name": {
+            "type": "string",
+            "nullable": true
+          },
+          "FindByMethod": {
+            "enum": [
+              "ById",
+              "ByClass",
+              "ByXPath"
+            ],
+            "type": "string"
+          },
+          "FindBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "PageId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetUIElementDtoPaginationResult": {
+        "type": "object",
+        "properties": {
+          "Count": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "Data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetUIElementDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetUIElementEventDto": {
+        "required": [
+          "TypeDiscriminator"
+        ],
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/GetUIEventDto"
+          }
+        ],
+        "properties": {
+          "TypeDiscriminator": {
+            "type": "string"
+          },
+          "WaitForUIElement": {
+            "type": "string",
+            "format": "time-span",
+            "example": "00:00:00"
+          },
+          "UseDefaultWaitForUIElement": {
+            "type": "boolean"
+          },
+          "UIElement": {
+            "$ref": "#/components/schemas/GetUIElementFromEvent"
+          }
+        },
+        "additionalProperties": false,
+        "discriminator": {
+          "propertyName": "TypeDiscriminator"
+        }
+      },
+      "GetUIElementFromEvent": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "Name": {
+            "type": "string",
+            "nullable": true
+          },
+          "Page": {
+            "$ref": "#/components/schemas/GetUIPageDto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetUIEventDto": {
+        "required": [
+          "TypeDiscriminator"
+        ],
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TypeDiscriminatorDto"
+          }
+        ],
+        "properties": {
+          "TypeDiscriminator": {
+            "type": "string"
+          },
+          "Name": {
+            "type": "string",
+            "nullable": true
+          },
+          "Step": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false,
+        "discriminator": {
+          "propertyName": "TypeDiscriminator"
+        }
+      },
+      "GetUIPageDetailsDto": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "Name": {
+            "type": "string",
+            "nullable": true
+          },
+          "Page": {
+            "$ref": "#/components/schemas/GetUIElementDtoPaginationResult"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetUIPageDto": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "Name": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetUIPageDtoPaginationResult": {
+        "type": "object",
+        "properties": {
+          "Count": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "Data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetUIPageDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetUITestCaseDetailsDto": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "Name": {
+            "type": "string",
+            "nullable": true
+          },
+          "StartUrl": {
+            "type": "string",
+            "format": "uri",
+            "nullable": true
+          },
+          "DefaultWaitForUIElement": {
+            "type": "string",
+            "format": "time-span",
+            "example": "00:00:00"
+          },
+          "Events": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/GetUIEventDto"
+                },
+                {
+                  "$ref": "#/components/schemas/GetClearContentEventDto"
+                },
+                {
+                  "$ref": "#/components/schemas/GetClickAtPositionEventDto"
+                },
+                {
+                  "$ref": "#/components/schemas/GetClickEventDto"
+                },
+                {
+                  "$ref": "#/components/schemas/GetImportFileEventDto"
+                },
+                {
+                  "$ref": "#/components/schemas/GetMoveByOffsetEventDto"
+                },
+                {
+                  "$ref": "#/components/schemas/GetMoveToUIElementEventDto"
+                },
+                {
+                  "$ref": "#/components/schemas/GetUIElementEventDto"
+                },
+                {
+                  "$ref": "#/components/schemas/GetWaitEventDto"
+                },
+                {
+                  "$ref": "#/components/schemas/GetWriteEventDto"
+                }
+              ]
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetUITestCaseDto": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "Name": {
+            "type": "string",
+            "nullable": true
+          },
+          "StartUrl": {
+            "type": "string",
+            "format": "uri",
+            "nullable": true
+          },
+          "DefaultWaitForUIElement": {
+            "type": "string",
+            "format": "time-span",
+            "example": "00:00:00"
+          },
+          "RunsPeriodically": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetUITestCaseDtoPaginationResult": {
+        "type": "object",
+        "properties": {
+          "Count": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "Data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetUITestCaseDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetUITestRunCaseDetailsDto": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "Name": {
+            "type": "string",
+            "nullable": true
+          },
+          "StartUrl": {
+            "type": "string",
+            "format": "uri",
+            "nullable": true
+          },
+          "Start": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "Duration": {
+            "type": "string",
+            "format": "time-span",
+            "nullable": true,
+            "example": "00:00:00"
+          },
+          "Browser": {
+            "enum": [
+              "Chrome",
+              "Edge",
+              "Firefox"
+            ],
+            "type": "string"
+          },
+          "State": {
+            "enum": [
+              "NotStarted",
+              "Started",
+              "Failure",
+              "Completed"
+            ],
+            "type": "string"
+          },
+          "Events": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/GetUITestRunEventDto"
+                },
+                {
+                  "$ref": "#/components/schemas/GetUITestRunClearContentEventDto"
+                },
+                {
+                  "$ref": "#/components/schemas/GetUITestRunClickAtPositionDto"
+                },
+                {
+                  "$ref": "#/components/schemas/GetUITestRunClickEventDto"
+                },
+                {
+                  "$ref": "#/components/schemas/GetUITestRunImportFileEventDto"
+                },
+                {
+                  "$ref": "#/components/schemas/GetUITestRunMoveByOffsetEventDto"
+                },
+                {
+                  "$ref": "#/components/schemas/GetUITestRunMoveToUIElementEventDto"
+                },
+                {
+                  "$ref": "#/components/schemas/GetUITestRunUIElementEventDto"
+                },
+                {
+                  "$ref": "#/components/schemas/GetUITestRunWaitEventDto"
+                },
+                {
+                  "$ref": "#/components/schemas/GetUITestRunWriteEventDto"
+                }
+              ]
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetUITestRunCaseDto": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "Name": {
+            "type": "string",
+            "nullable": true
+          },
+          "Start": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "Duration": {
+            "type": "string",
+            "format": "time-span",
+            "nullable": true,
+            "example": "00:00:00"
+          },
+          "Browser": {
+            "enum": [
+              "Chrome",
+              "Edge",
+              "Firefox"
+            ],
+            "type": "string"
+          },
+          "State": {
+            "enum": [
+              "NotStarted",
+              "Started",
+              "Failure",
+              "Completed"
+            ],
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetUITestRunCasesDto": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "Start": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "State": {
+            "enum": [
+              "Started",
+              "Failure",
+              "Completed"
+            ],
+            "type": "string"
+          },
+          "TestCases": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetUITestRunCaseDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetUITestRunClearContentEventDto": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/GetUITestRunUIElementEventDto"
+          }
+        ],
+        "additionalProperties": false
+      },
+      "GetUITestRunClickAtPositionDto": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/GetUITestRunEventDto"
+          }
+        ],
+        "additionalProperties": false
+      },
+      "GetUITestRunClickEventDto": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/GetUITestRunUIElementEventDto"
+          }
+        ],
+        "additionalProperties": false
+      },
+      "GetUITestRunDto": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "Start": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "CompletedCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "FailedCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "StartedCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "NotStartedCount": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetUITestRunDtoPaginationResult": {
+        "type": "object",
+        "properties": {
+          "Count": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "Data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetUITestRunDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetUITestRunEventDto": {
+        "required": [
+          "TypeDiscriminator"
+        ],
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TypeDiscriminatorDto"
+          }
+        ],
+        "properties": {
+          "TypeDiscriminator": {
+            "type": "string"
+          },
+          "Id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "Name": {
+            "type": "string",
+            "nullable": true
+          },
+          "Start": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "Duration": {
+            "type": "string",
+            "format": "time-span",
+            "nullable": true,
+            "example": "00:00:00"
+          },
+          "State": {
+            "enum": [
+              "NotStarted",
+              "Started",
+              "Failure",
+              "Cancel",
+              "Completed"
+            ],
+            "type": "string"
+          },
+          "Result": {
+            "enum": [
+              "NotStarted",
+              "Success",
+              "UnexpectedError",
+              "WebDriverException",
+              "ElementNotInteractable",
+              "NoSuchElement",
+              "ElementNotVisible",
+              "InvalidSelector",
+              "ElementClickIntercepted",
+              "StaleElementReference",
+              "InvalidElementState",
+              "UnhandledAlert",
+              "NoAlertPresent",
+              "NoSuchFrame",
+              "NoSuchWindow",
+              "Timeout"
+            ],
+            "type": "string"
+          },
+          "Step": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false,
+        "discriminator": {
+          "propertyName": "TypeDiscriminator"
+        }
+      },
+      "GetUITestRunImportFileEventDto": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/GetUITestRunUIElementEventDto"
+          }
+        ],
+        "properties": {
+          "FileName": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetUITestRunMoveByOffsetEventDto": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/GetUITestRunEventDto"
+          }
+        ],
+        "properties": {
+          "OffsetX": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "OffsetY": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetUITestRunMoveToUIElementEventDto": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/GetUITestRunUIElementEventDto"
+          }
+        ],
+        "additionalProperties": false
+      },
+      "GetUITestRunUIElementDto": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "Name": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetUITestRunUIElementEventDto": {
+        "required": [
+          "TypeDiscriminator"
+        ],
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/GetUITestRunEventDto"
+          }
+        ],
+        "properties": {
+          "TypeDiscriminator": {
+            "type": "string"
+          },
+          "WaitForUIElement": {
+            "type": "string",
+            "format": "time-span",
+            "example": "00:00:00"
+          },
+          "UIElement": {
+            "$ref": "#/components/schemas/GetUITestRunUIElementDto"
+          }
+        },
+        "additionalProperties": false,
+        "discriminator": {
+          "propertyName": "TypeDiscriminator"
+        }
+      },
+      "GetUITestRunWaitEventDto": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/GetUITestRunEventDto"
+          }
+        ],
+        "properties": {
+          "Ticks": {
+            "type": "string",
+            "format": "time-span",
+            "example": "00:00:00"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetUITestRunWriteEventDto": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/GetUITestRunUIElementEventDto"
+          }
+        ],
+        "properties": {
+          "Input": {
+            "type": "string",
+            "nullable": true
+          },
+          "GenerateUnique": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetUserFileDto": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "FileName": {
+            "type": "string",
+            "nullable": true
+          },
+          "FileSize": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "CreatedDateTime": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetUserFileDtoPaginationResult": {
+        "type": "object",
+        "properties": {
+          "Count": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "Data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetUserFileDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetWaitEventDto": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/GetUIEventDto"
+          }
+        ],
+        "properties": {
+          "Ticks": {
+            "type": "string",
+            "format": "time-span",
+            "example": "00:00:00"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetWriteEventDto": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/GetUIElementEventDto"
+          }
+        ],
+        "properties": {
+          "Input": {
+            "type": "string",
+            "nullable": true
+          },
+          "GenerateUnique": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PostResponse": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PostUITestRunDto": {
+        "type": "object",
+        "properties": {
+          "SelectedTestCases": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProblemDetails": {
+        "required": [
+          "TypeDiscriminator"
+        ],
+        "type": "object",
+        "properties": {
+          "TypeDiscriminator": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "detail": {
+            "type": "string",
+            "nullable": true
+          },
+          "instance": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": { },
+        "discriminator": {
+          "propertyName": "TypeDiscriminator"
+        }
+      },
+      "PutClearContentEventDto": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/PutUIElementEventDto"
+          }
+        ],
+        "additionalProperties": false
+      },
+      "PutClickAtPositionEventDto": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/PutUIEventDto"
+          }
+        ],
+        "additionalProperties": false
+      },
+      "PutClickEventDto": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/PutUIElementEventDto"
+          }
+        ],
+        "additionalProperties": false
+      },
+      "PutImportFileEventDto": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/PutUIElementEventDto"
+          }
+        ],
+        "properties": {
+          "UserFileId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PutMoveByOffsetEventDto": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/PutUIEventDto"
+          }
+        ],
+        "properties": {
+          "OffsetX": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "OffsetY": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PutMoveToUIElementEventDto": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/PutUIElementEventDto"
+          }
+        ],
+        "additionalProperties": false
+      },
+      "PutUIElementEventDto": {
+        "required": [
+          "TypeDiscriminator"
+        ],
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/PutUIEventDto"
+          }
+        ],
+        "properties": {
+          "TypeDiscriminator": {
+            "type": "string"
+          },
+          "WaitForUIElement": {
+            "type": "string",
+            "format": "time-span",
+            "example": "00:00:00"
+          },
+          "UseDefaultWaitForUIElement": {
+            "type": "boolean"
+          },
+          "UIElementId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false,
+        "discriminator": {
+          "propertyName": "TypeDiscriminator"
+        }
+      },
+      "PutUIEventDto": {
+        "required": [
+          "TypeDiscriminator"
+        ],
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TypeDiscriminatorDto"
+          }
+        ],
+        "properties": {
+          "TypeDiscriminator": {
+            "type": "string"
+          },
+          "Name": {
+            "type": "string",
+            "nullable": true
+          },
+          "Step": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false,
+        "discriminator": {
+          "propertyName": "TypeDiscriminator"
+        }
+      },
+      "PutWaitEventDto": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/PutUIEventDto"
+          }
+        ],
+        "properties": {
+          "Ticks": {
+            "type": "string",
+            "format": "time-span",
+            "example": "00:00:00"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PutWriteEventDto": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/PutUIElementEventDto"
+          }
+        ],
+        "properties": {
+          "Input": {
+            "type": "string",
+            "nullable": true
+          },
+          "GenerateUnique": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TestCasesStatusInfo": {
+        "type": "object",
+        "properties": {
+          "State": {
+            "enum": [
+              "NotStarted",
+              "Started",
+              "Failure",
+              "Completed"
+            ],
+            "type": "string"
+          },
+          "Count": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TypeDiscriminatorDto": {
+        "required": [
+          "TypeDiscriminator"
+        ],
+        "type": "object",
+        "properties": {
+          "TypeDiscriminator": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false,
+        "discriminator": {
+          "propertyName": "TypeDiscriminator"
+        }
+      },
+      "UpdateEventsDto": {
+        "type": "object",
+        "properties": {
+          "Events": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/PutUIEventDto"
+                },
+                {
+                  "$ref": "#/components/schemas/PutClearContentEventDto"
+                },
+                {
+                  "$ref": "#/components/schemas/PutClickAtPositionEventDto"
+                },
+                {
+                  "$ref": "#/components/schemas/PutClickEventDto"
+                },
+                {
+                  "$ref": "#/components/schemas/PutImportFileEventDto"
+                },
+                {
+                  "$ref": "#/components/schemas/PutMoveByOffsetEventDto"
+                },
+                {
+                  "$ref": "#/components/schemas/PutMoveToUIElementEventDto"
+                },
+                {
+                  "$ref": "#/components/schemas/PutUIElementEventDto"
+                },
+                {
+                  "$ref": "#/components/schemas/PutWaitEventDto"
+                },
+                {
+                  "$ref": "#/components/schemas/PutWriteEventDto"
+                }
+              ]
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ValidationProblemDetails": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ProblemDetails"
+          }
+        ],
+        "properties": {
+          "errors": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": { }
+      }
+    }
+  }
+}

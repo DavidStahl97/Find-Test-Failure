@@ -1,0 +1,13 @@
+﻿<MudElement Class="@(Class)">
+    @if (_inProcess)
+    {
+        <MudProgressCircular Color="Color.Primary"
+                             Size="Size.Small"
+                             Indeterminate="true" />
+    }
+    else
+    {
+        <MudButton Color="Color"
+                   OnClick="OnClick">@ChildContent</MudButton>
+    }
+</MudElement>

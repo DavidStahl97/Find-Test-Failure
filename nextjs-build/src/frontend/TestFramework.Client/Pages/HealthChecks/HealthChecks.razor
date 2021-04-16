@@ -1,0 +1,69 @@
+﻿@page "/healthchecks"
+
+<div class="d-flex justify-space-between mb-3">
+    <MudText Typo="Typo.h5">Health Checks</MudText>
+
+    <div>
+        <MudButton Variant="Variant.Filled"
+                   Color="Color.Primary"
+                   OnClick="Create"
+                   Size="Size.Small">Create</MudButton>
+    </div>
+</div>
+
+<TablePagination SearchFunction="Search"
+                 @ref="_pagination"
+                 TItem="TestFramework.Client.WebAPI.GetHealthCheckDto"
+                 ShowSearch="true">
+    <ColumnGroup>
+        <col style="width: 100px" />
+        <col style="width:300px;" />
+        <col />
+        <col style="width: 100px" />
+        <col style="width: 100px" />
+    </ColumnGroup>
+    <Header>
+        <MudTh>Healthy</MudTh>
+        <MudTh>Name</MudTh>
+        <MudTh>Url</MudTh>
+        <MudTh>Edit</MudTh>
+        <MudTh>Remove</MudTh>
+    </Header>
+    <RowTemplate Context="healthCheck">
+        @if (healthCheck.Healthy)
+        {
+            <MudTh>
+                <MudIconButton Icon="@Icons.Material.Filled.Check"/>
+            </MudTh>
+        }
+        else
+        {
+            <MudTh>
+                <MudIconButton Icon="@Icons.Material.Filled.ErrorOutline"/>
+            </MudTh>
+        }
+        <MudTd>@healthCheck.Name</MudTd>
+        <MudTd>@healthCheck.Url</MudTd>
+        <MudTh>
+            <MudIconButton Icon="@Icons.Material.Filled.Edit"
+                           OnClick="() => Edit(healthCheck)" />
+        </MudTh>
+        <MudTd>
+            <MudIconButton Icon="@Icons.Material.Filled.Delete"
+                           OnClick="() => Delete(healthCheck)" />
+        </MudTd>
+    </RowTemplate>
+    <SkeletonRow>
+        <MudTh>
+            <MudIconButton Icon="@Icons.Material.Filled.ErrorOutline" />
+        </MudTh>
+        <SkeletonCell Width="200" />
+        <SkeletonCell Width="300" />
+        <MudTh>
+            <MudIconButton Icon="@Icons.Material.Filled.Edit" />
+        </MudTh>
+        <MudTd>
+            <MudIconButton Icon="@Icons.Material.Filled.Delete" />
+        </MudTd>
+    </SkeletonRow>
+</TablePagination>

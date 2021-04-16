@@ -1,0 +1,41 @@
+﻿@namespace TestFramework.Client.Components
+@inherits ComponentBase
+@typeparam TItem
+
+<Timer TimeInMilliseconds="1000" Tick="OnTick" />
+
+<CascadingValue Value="pagination">
+    <MudToolBar Class="mb-15">
+        <MudTextFieldString Placeholder="Search"
+                            Adornment="Adornment.Start"
+                            AdornmentIcon="@Icons.Material.Filled.Search"
+                            IconSize="Size.Small"
+                            Class="mt-n5"
+                            @bind-Value="search"
+                            Immediate="true"                             
+                            @onkeyup="@OnSearchKeyUp"
+                            Style="@(ShowSearch ? "visibility: visible" : "visibility: hidden")"/>
+        <MudToolBarSpacer />
+        <SelectPage PageChangedEvent="@SearchAsync" />
+    </MudToolBar>
+
+    @if (showSkeleton)
+    {
+        @SkeletonContent
+    }
+    else if (items.Any() == false)
+    {
+        <MudToolBar Class="d-flex justify-center"
+                    Style="width: 100%;
+                           margin-top: 75px;">
+            <MudIcon Icon="@Icons.Material.Filled.Search"
+                     Size="Size.Large"
+                     Class="mr-3" />
+            <MudText Typo="Typo.h6">No Result</MudText>
+        </MudToolBar>
+    }
+    else
+    {
+        @Content(items)
+    }
+</CascadingValue>

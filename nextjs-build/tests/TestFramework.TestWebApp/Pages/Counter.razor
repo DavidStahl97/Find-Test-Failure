@@ -1,0 +1,22 @@
+﻿@page "/counter"
+
+@inject IJSRuntime JsRuntime
+
+<h1>Counter</h1>
+
+<p>Current count: @currentCount</p>
+
+<button id="count-button" class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+
+@code {
+    private int currentCount = 0;
+
+    private async Task IncrementCount()
+    {
+        currentCount++;
+        await JsRuntime.InvokeVoidAsync($"console.log", $"Log Information; Count: {currentCount}");
+        await JsRuntime.InvokeVoidAsync($"console.warn", $"Log Warning; Count: {currentCount}");
+        await JsRuntime.InvokeVoidAsync($"console.error", $"Log Error; Count: {currentCount}");
+        throw new ArgumentException($"Count: {currentCount}");
+    }
+}

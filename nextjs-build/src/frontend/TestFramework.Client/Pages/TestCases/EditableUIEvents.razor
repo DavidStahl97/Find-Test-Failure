@@ -1,0 +1,30 @@
+﻿@using TestFramework.Client.WebAPI
+@using TestFramework.Client.Pages.TestCases.EditEvents
+@using Microsoft.AspNetCore.Components.Web.Virtualization
+
+<div class="d-flex justify-center">
+    <MudIconButton Icon="@Icons.Material.Filled.Add" 
+                   Class="mt-5"
+                   OnClick="() => AddEvent(0)"/>
+</div>
+
+<Virtualize Items="Events" 
+            Context="Item"
+            TItem="EditEventItem"
+            OverscanCount="3">
+    
+    <EditableEvent AllPages="_allPages"
+                   AllUserFiles="_allFiles"
+                   EventCount="Events.Count"
+                   Item="Item"
+                   OnDeleteEvent="DeleteEvent"
+                   OnMoveEventBottom="MoveEventBottom"
+                   OnMoveEventTop="MoveEventTop"/>
+
+
+    <div class="d-flex justify-center">
+        <MudIconButton Icon="@Icons.Material.Filled.Add"
+                       Class="mt-5"
+                       OnClick="() => AddEvent(Item.Index + 1)" />
+    </div>
+</Virtualize>

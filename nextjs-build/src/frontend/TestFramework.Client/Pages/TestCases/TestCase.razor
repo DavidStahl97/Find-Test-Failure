@@ -1,0 +1,51 @@
+﻿@page "/testcases/{TestCaseId:int}"
+
+@using TestFramework.Client.WebAPI
+
+@if (_testCase is null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <div class="mb-5 d-flex align-start">
+        <MudField Label="Name" 
+                  Variant="Variant.Text"
+                  Class="mr-5">@_testCase.Name</MudField>
+
+        <MudToolBarSpacer/>
+        <MudToolBarSpacer/>
+        <MudToolBarSpacer/>
+
+        @if (_editing)
+        {
+            <MudIconButton Icon="@Icons.Material.Filled.Cancel"
+                           OnClick="CancelEditing"/>
+            <MudIconButton Icon="@Icons.Material.Filled.Save"
+                           OnClick="SaveChanges"/>
+        }
+        else
+        {
+            <MudIconButton Icon="@Icons.Material.Filled.Edit"         
+                           OnClick="Edit"/>
+        }
+    </div>
+
+    <div class="mb-7 d-flex align-start">
+        <MudField Label="URL"
+                  Variant="Variant.Text">@_testCase.StartUrl</MudField>
+        <MudToolBarSpacer />
+        <MudToolBarSpacer />
+    </div>
+
+    <div class="mb-7">
+        <MudField Label="Default Wait For UI Element"
+                  Variant="Variant.Text">@_testCase.DefaultWaitForUIElement</MudField>
+    </div>
+
+    <DirectValidationForm @ref="_validationForm">
+        <Events Editing="_editing"
+                Changes="_changes"
+                SavedUIEvents="_testCase.Events"/>
+    </DirectValidationForm>
+}

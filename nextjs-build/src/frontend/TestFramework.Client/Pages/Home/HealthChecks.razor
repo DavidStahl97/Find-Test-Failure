@@ -1,0 +1,20 @@
+﻿<MudText Typo="Typo.h4"
+         Class="mb-3">Health Checks</MudText>
+
+<div class="d-flex align-content-start flex-wrap">
+    @foreach (var healthCheck in _healthChecks)
+    {
+        @if (healthCheck.Healthy)
+        {
+            <MudChip Color="Color.Success"
+                     Icon="@Icons.Material.Filled.Check"
+                     Style="@($"background-color: {AppColors.Success}")">@healthCheck.Name</MudChip>
+        }
+        else
+        {
+            <MudChip Color="Color.Error"
+                     Icon="@Icons.Material.Outlined.Error"
+                     Style="@($"background-color: {AppColors.Failure}")">@healthCheck.Name</MudChip>
+        }
+    }
+</div>

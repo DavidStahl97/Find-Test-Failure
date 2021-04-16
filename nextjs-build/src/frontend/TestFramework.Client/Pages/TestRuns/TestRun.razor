@@ -1,0 +1,28 @@
+﻿@page "/testruns/{TestRunId:int}"
+
+@if (testRun is null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <MudTable Items="testRun.TestCases" 
+              T="TestFramework.Client.WebAPI.GetUITestRunCaseDto"
+              Hover="true"
+              SelectedItemChanged="@(x => Navigation.NavigateTo($"/testruns/testruncases/{x.Id}"))">
+        <HeaderContent>
+            <MudTh>Name</MudTh>
+            <MudTh>Start</MudTh>
+            <MudTh>Duration</MudTh>
+            <MudTh>Browser</MudTh>
+            <MudTh>State</MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd>@context.Name</MudTd>
+            <MudTd>@context.Start</MudTd>
+            <MudTd>@context.Duration</MudTd>
+            <MudTd>@context.Browser</MudTd>
+            <MudTd>@context.State</MudTd>
+        </RowTemplate>
+    </MudTable>
+}

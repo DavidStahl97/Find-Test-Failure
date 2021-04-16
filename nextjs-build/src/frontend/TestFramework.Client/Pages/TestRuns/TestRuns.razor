@@ -1,0 +1,47 @@
+﻿@page "/testruns"
+
+<MudText Typo="Typo.h5">Runs</MudText>
+
+<TablePagination SearchFunction="Search"
+                 TItem="TestFramework.Client.WebAPI.GetUITestRunDto"
+                 SelectedItemChanged="TestRunClicked"
+                 ShowSearch="false">
+    <ColumnGroup>
+        <col />
+        <col style="width:110px;" />
+        <col style="width:100px;" />
+        <col style="width:100px;" />
+        <col style="width:100px;" />
+    </ColumnGroup>
+    <Header>
+        <MudTh>Start</MudTh>
+        <MudTh>Not Started</MudTh>
+        <MudTh>Started</MudTh>
+        <MudTh>Failed</MudTh>
+        <MudTh>Completed</MudTh>
+    </Header>
+    <RowTemplate Context="run">
+        <MudTd>@run.Start</MudTd>
+        @foreach (var (count, color) in CreateColoredList(run))
+        {
+            @if (count > 0)
+            {
+                <MudTd>
+                    <MudText Class="d-flex justify-center"
+                             Style="@($"color: {color}")">@count</MudText>
+                </MudTd>            
+            }
+            else
+            {
+                <MudTd></MudTd>
+            }
+        }
+    </RowTemplate>
+    <SkeletonRow>
+        <SkeletonCell Width="300" />
+        <SkeletonCell Width="100" />
+        <SkeletonCell Width="100" />
+        <SkeletonCell Width="100" />
+        <SkeletonCell Width="100" />
+    </SkeletonRow>
+</TablePagination>

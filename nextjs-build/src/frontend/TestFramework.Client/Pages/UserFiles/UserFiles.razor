@@ -1,0 +1,50 @@
+﻿@page "/userfiles"
+
+<InputFile id="fileInput" OnChange="UploadFiles" hidden multiple />
+
+<div class="d-flex justify-space-between mb-3">
+    <MudText Typo="Typo.h5">Files</MudText>
+
+    <MudButton HtmlTag="label"
+               Variant="Variant.Filled"
+               Color="Color.Primary"
+               StartIcon="@Icons.Filled.CloudUpload"
+               for="fileInput">
+        Upload Files
+    </MudButton>
+</div>
+
+<TablePagination SearchFunction="Search"
+                 TItem="TestFramework.Client.WebAPI.GetUserFileDto"
+                 @ref="_pagination"
+                 ShowSearch="true">
+    <ColumnGroup>
+        <col />
+        <col style="width:250px;" />
+        <col style="width:100px;"/>
+        <col style="width:100px;" />
+    </ColumnGroup>
+    <Header>
+        <MudTh>File</MudTh>
+        <MudTh>Created</MudTh>
+        <MudTh>Size</MudTh>
+        <MudTh>Remove</MudTh>
+    </Header>
+    <RowTemplate Context="file">
+        <MudTd>@file.FileName</MudTd>
+        <MudTd>@file.CreatedDateTime</MudTd>
+        <MudTd>@CreateSizeString(file)</MudTd>
+        <MudTd>
+            <MudIconButton Icon="@Icons.Material.Filled.Delete"
+                           OnClick="@(() => DeleteUserFile(file))" />
+        </MudTd>
+    </RowTemplate>
+    <SkeletonRow>
+        <SkeletonCell Width="400" />
+        <SkeletonCell Width="200" />
+        <SkeletonCell Width="50" />
+        <MudTd>
+            <MudIconButton Icon="@Icons.Material.Filled.Delete" />
+        </MudTd>
+    </SkeletonRow>
+</TablePagination>

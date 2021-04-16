@@ -1,0 +1,23 @@
+﻿<MudDialog>
+    <DialogContent>
+        <DirectValidationForm @bind-IsValid="@_isValidForm"
+                              Class="ma-5"
+                              Style="width: 400px"
+                              @ref="_form">
+            <MudTextField Label="Name"
+                          Class="mb-5"
+                          @bind-Value="HealthCheck.Name" 
+                          Validation="_nameValidator.Validation"/>
+            <MudTextField Label="URL"
+                          Class="mb-5"
+                          @bind-Value="HealthCheck.Url"
+                          Converter="new UriConverter()" 
+                          Validation="_uriValidator.Validation"/>
+        </DirectValidationForm>
+    </DialogContent>
+    <DialogActions>
+        <MudButton Color="Color.Primary"
+                   OnClick="ClickEvent"
+                   Disabled="@(_isValidForm == false)">@EventName</MudButton>
+    </DialogActions>
+</MudDialog>

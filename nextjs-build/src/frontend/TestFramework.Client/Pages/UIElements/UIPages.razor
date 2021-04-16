@@ -1,0 +1,47 @@
+﻿@page "/uipages"
+
+<div class="d-flex justify-space-between mb-3">
+    <MudText Typo="Typo.h5">UI Pages</MudText>
+
+    <MudButton Variant="Variant.Filled"
+               Color="Color.Primary"
+               Size="Size.Small"
+               OnClick="AddUIPage">Create</MudButton>
+</div>
+
+<TablePagination SearchFunction="Search"
+                 TItem="TestFramework.Client.WebAPI.GetUIPageDto"
+                 @ref="_pagination"
+                 SelectedItemChanged="@(x => Navigation.NavigateTo($"/uipages/{x.Id}"))"
+                 ShowSearch="true">
+    <ColumnGroup>
+        <col />
+        <col style="width:100px;" />
+        <col style="width:100px;" />
+    </ColumnGroup>
+    <Header>
+        <MudTh>Page</MudTh>
+        <MudTh>Edit</MudTh>
+        <MudTh>Remove</MudTh>
+    </Header>
+    <RowTemplate Context="uiPage">
+        <MudTd>@uiPage.Name</MudTd>
+        <MudTh>
+            <MudIconButton Icon="@Icons.Material.Filled.Edit"
+                           OnClick="@(() => EditUIPage(uiPage))" />
+        </MudTh>
+        <MudTd>
+            <MudIconButton Icon="@Icons.Material.Filled.Delete"
+                           OnClick="@(() => DeleteUIPage(uiPage))" />
+        </MudTd>
+    </RowTemplate>
+    <SkeletonRow>
+        <SkeletonCell Width="400"/>
+        <MudTh>
+            <MudIconButton Icon="@Icons.Material.Filled.Edit"/>
+        </MudTh>
+        <MudTd>
+            <MudIconButton Icon="@Icons.Material.Filled.Delete"/>
+        </MudTd>
+    </SkeletonRow>
+</TablePagination>

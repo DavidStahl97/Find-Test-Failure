@@ -1,0 +1,28 @@
+{
+    "@type": "MessageCard",
+    "@context": "http://schema.org/extensions",
+    "themeColor": "0076D7",
+    "summary": "UI Test Error",
+    "sections": [{
+        "activityTitle": "UI Test Error",
+        "facts": [{
+            "name": "UI Test",
+            "value": "Unassigned"
+        }, {
+            "name": "Started",
+            "value": "Mon May 01 2017 17:07:18 GMT-0700 (Pacific Daylight Time)"
+        }, {
+            "name": "Browser",
+            "value": "Edge"
+        }],        
+        "markdown": true
+    }],
+    "potentialAction": [{
+        "@type": "OpenUri",
+        "name": "Link",
+        "targets": [{
+            "os": "default",
+            "uri": "https://docs.microsoft.com/outlook/actionable-messages"
+        }]
+    }]
+}

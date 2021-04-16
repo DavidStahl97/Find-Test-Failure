@@ -1,0 +1,23 @@
+﻿<MudDialog>
+    <DialogContent>
+        <div class="ma-5">
+            <p class="mb-5">Do you really want to delete the @(ResourceType)?</p>
+            <div class="d-flex justify-start">
+                <MudField Label="Name" Variant="Variant.Text">@ResourceName</MudField>
+                <MudToolBarSpacer />
+            </div>
+            @if (_deletionFailed)
+            {
+                <MudText Color="Color.Error"
+                         Class="mt-5">
+                    Deletion Failed. Probably because it is still used.
+                </MudText>
+            } 
+        </div>
+    </DialogContent>
+    <DialogActions>
+        <AsyncButton Color="Color.Primary"
+                     OnAsyncClick="Delete"
+                     Class="ma-3">Delete</AsyncButton>
+    </DialogActions>
+</MudDialog>

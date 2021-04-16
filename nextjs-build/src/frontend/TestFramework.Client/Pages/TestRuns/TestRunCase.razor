@@ -1,0 +1,72 @@
+﻿@page "/testruns/testruncases/{TestRunCaseId:int}"
+
+@using TestFramework.Client.WebAPI
+
+@if (testCase is null)
+{
+    <p>Loading...</p>
+}
+else
+{
+<MudTable Items="Events" Hover="true">
+    <HeaderContent>
+        <MudTh>Name</MudTh>
+        <MudTh>Start</MudTh>
+        <MudTh>Duration</MudTh>
+        <MudTh>State</MudTh>
+        <MudTh>Failure</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="Name">@context.Name</MudTd>
+        <MudTd DataLabel="Start">@context.Start</MudTd>
+        <MudTd DataLabel="Duration">@context.Duration</MudTd>
+        <MudTd DataLabel="State">@context.State</MudTd>
+        <MudTd DataLabel="Failure">@context.Result</MudTd>
+    </RowTemplate>
+    <ChildRowContent Context="uiEvent">
+        <MudTr>
+            <td colspan="5">
+                <div class="d-flex align-start ma-10">                    
+                    @if (uiEvent is GetUITestRunClickEventDto clickEvent)
+                    {
+                        <UIEventField Label="Event Type">Click Event</UIEventField>
+                    }
+                    else if (uiEvent is GetUITestRunWriteEventDto writeEvent)
+                    {
+                        <UIEventField Label="Event Type">Write Event</UIEventField>
+                        <UIEventField Label="Input">@writeEvent.Input</UIEventField>
+                    }
+                    else if (uiEvent is GetUITestRunWaitEventDto waitEvent)
+                    {
+                        <UIEventField Label="Wait">@waitEvent.Ticks</UIEventField>
+                    }
+                    else if (uiEvent is GetUITestRunMoveToUIElementEventDto)
+                    {
+                        <UIEventField Label="Event Type">Move to UI Element</UIEventField>
+                    }
+                    else if (uiEvent is GetUITestRunClickAtPositionDto)
+                    {
+                        <UIEventField Label="Event Type">Click At Position</UIEventField>
+                    }
+                    else if (uiEvent is GetUITestRunMoveByOffsetEventDto moveByOffsetEvent)
+                    {
+                        <UIEventField Label="Event Type">Move By Offset</UIEventField>
+                        <UIEventField Label="Offset X">@moveByOffsetEvent.OffsetX</UIEventField>
+                        <UIEventField Label="Offset Y">@moveByOffsetEvent.OffsetY</UIEventField>
+                    }
+                    else if (uiEvent is GetUITestRunClearContentEventDto)
+                    {
+                        <UIEventField Label="Event Type">Clear Content</UIEventField>
+                    }
+
+                    @if (uiEvent is GetUITestRunUIElementEventDto uiElementEvent)
+                    {
+                        <UIEventField Label="UI Element">@uiElementEvent.UIElement.Name</UIEventField>
+                    } 
+                </div>
+                <MudDivider />
+            </td>
+        </MudTr>
+    </ChildRowContent>
+</MudTable>
+}

@@ -1,0 +1,74 @@
+﻿@page "/testcases"
+
+<div class="d-flex justify-space-between mb-3">
+    <MudText Typo="Typo.h5">Test Cases</MudText>
+
+    <div>
+        <MudButton Variant="Variant.Filled"
+                   Color="Color.Primary"
+                   Size="Size.Small"
+                   Disabled="DisableStartButton"
+                   OnClick="StartRun"
+                   Class="mr-3">Start</MudButton>
+
+        <MudButton Variant="Variant.Filled"
+                   Color="Color.Primary"
+                   OnClick="AddTestCase"
+                   Size="Size.Small">Create</MudButton>
+    </div>
+</div>
+
+<TablePagination SearchFunction="Search"
+                 @ref="_pagination"
+                 TItem="TestFramework.Client.WebAPI.GetUITestCaseDto"
+                 SelectedItemChanged="@(x => Navigation.NavigateTo($"/testcases/{x.Id}"))"
+                 MultiSelection="true"
+                 SelectedItemsChanged="SelectedTestCases"
+                 ShowSearch="true">
+    <ColumnGroup>
+        <col style="width: 50px"/>
+        <col />
+        <col style="width:150px;"/>
+        <col style="width:100px;" />
+        <col style="width:100px;" />
+    </ColumnGroup>
+    <Header>
+        <MudTh>Name</MudTh>
+        <MudTh>Automated Run</MudTh>
+        <MudTh>Edit</MudTh>
+        <MudTh>Remove</MudTh>
+    </Header>
+    <RowTemplate Context="testCase">
+        <MudTd>@testCase.Name</MudTd>
+
+        <MudTh>
+            @if (testCase.RunsPeriodically)
+            {                
+                <MudIcon Icon="@Icons.Material.Filled.Check"
+                         Class="ml-10"/>
+            }
+        </MudTh>        
+        
+        <MudTh>
+            <MudIconButton Icon="@Icons.Material.Filled.Edit"
+                           OnClick="() => EditTestCase(testCase)" />
+        </MudTh>
+        <MudTd>
+            <MudIconButton Icon="@Icons.Material.Filled.Delete"
+                           OnClick="() => DeleteTestCase(testCase)" />
+        </MudTd>
+    </RowTemplate>
+    <SkeletonRow>
+        <SkeletonCell Width="400" />
+        <MudTh>
+            <MudIcon Icon="@Icons.Material.Filled.Check" 
+                     Class="ml-10"/>
+        </MudTh>
+        <MudTh>
+            <MudIconButton Icon="@Icons.Material.Filled.Edit"/>
+        </MudTh>
+        <MudTd>
+            <MudIconButton Icon="@Icons.Material.Filled.Delete"/>
+        </MudTd>
+    </SkeletonRow>
+</TablePagination>

@@ -1,0 +1,1 @@
+docker-compose -f docker-compose.yml -f docker-compose.testframework.yml -f docker-compose.testframework.release.yml -f docker-compose.testwebapp.yml --project-name testframework-integrationtests up --detach

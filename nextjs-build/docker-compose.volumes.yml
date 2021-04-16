@@ -1,0 +1,14 @@
+version: '3.4'
+
+services: 
+  elasticsearch:
+    volumes:
+      - ./volumes/elastic:/usr/share/elasticsearch/data
+
+  db:
+    volumes:
+      - ./volumes/mysql:/var/lib/mysql
+
+  db-backup:
+    volumes:
+     - ./volumes/mysql-backup:/db

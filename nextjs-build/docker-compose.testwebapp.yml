@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  testwebapp:
+    container_name: testwebapp
+    image: davidstahl97/testwebapp
+    ports:
+      - 5100:5100

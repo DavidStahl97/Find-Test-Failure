@@ -1,0 +1,32 @@
+﻿@using TestFramework.Client.WebAPI
+
+<MudDialog>
+    <DialogContent>
+        <DirectValidationForm @bind-IsValid="@_isValidForm"
+                              Class="ma-5"
+                              @ref="_form">
+            <MudTextField Label="Name"
+                          Class="mb-5"
+                          Validation="_nameValidation.Validation"
+                          @bind-Value="UIElement.Name" />
+            <MudSelect T="ChangeOrCreateUIElemenDtoFindByMethod"
+                       Label="Find By Method"
+                       Class="mb-5"
+                       @bind-Value="UIElement.FindByMethod">
+                @foreach (var method in Enum.GetValues<ChangeOrCreateUIElemenDtoFindByMethod>())
+                {
+                    <MudSelectItem Value="method" />
+                }
+            </MudSelect>
+            <MudTextField T="string"
+                          Label="Find By"
+                          Validation="_findByValidation.Validation"                          
+                          @bind-Value="UIElement.FindBy" />
+        </DirectValidationForm>
+    </DialogContent>
+    <DialogActions>
+        <MudButton Color="Color.Primary"
+                   OnClick="ClickEvent"
+                   Disabled="@(_isValidForm == false)">@EventName</MudButton>
+    </DialogActions>
+</MudDialog>

@@ -1,0 +1,25 @@
+version: '3.4'
+
+services:
+  testframework.webapi:
+    container_name: testframework-webapi
+    image: davidstahl97/testframework-webapi
+    ports:
+      - 80:80
+    environment:
+      - ConnectionStrings__Database=Server=db;Port=3306;Database=TestFramework;User=${DB_USERNAME};Password=${DB_PASSWORD};
+      - WebUITesting__SeleniumHubUrl=http://selenium-hub:4444/wd/hub
+      - WebUITesting__NumberOfWorkers=3
+      - ElasticConfiguration__Uri=http://elasticsearch:9200
+      - RunUITestsIntervalInMinutes=60
+      - RemoteWebDriverApi__Uri=http://selenium-hub:4444
+    volumes:
+      - ./volumes/testframework-webapi/data/user-files:/data/user-files
+    depends_on:
+      db:
+        condition: service_healthy
+      elasticsearch:
+        condition: service_healthy
+      selenium-hub:
+        condition: service_healthy
+    

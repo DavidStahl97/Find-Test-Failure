@@ -1,0 +1,14 @@
+version: '3.4'
+
+services:
+  elasticsearch:
+    volumes:
+    - ./tests/TestFramework.IntegrationTests/volumes/elasticsearch:/usr/share/elasticsearch/data
+
+  db:
+   volumes:
+     - ./tests/TestFramework.IntegrationTests/volumes/mysql:/var/lib/mysql 
+  
+  db-backup:
+    volumes:
+     - ./tests/TestFramework.IntegrationTests/volumes/mysql-backup:/db

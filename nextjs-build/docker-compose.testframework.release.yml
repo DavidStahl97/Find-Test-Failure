@@ -1,0 +1,7 @@
+version: '3.4'
+
+services:
+  testframework.webapi:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - MicrosoftTeamsApi__Uri=https://lohgroup.webhook.office.com/webhookb2/97507c07-d856-463f-8714-021ae1b52b8e@a8218bc3-7d4c-4a61-b912-a6ca487118dd/IncomingWebhook/54124e04597d48ee9679c6c599690c85/f8bc7cf3-75fb-4b0a-a1dd-fc5ec86061d1

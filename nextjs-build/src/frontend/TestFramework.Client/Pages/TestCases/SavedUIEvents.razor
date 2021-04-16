@@ -1,0 +1,76 @@
+﻿@using TestFramework.Client.WebAPI
+
+<MudExpansionPanels MultiExpansion="true">
+    @foreach (var uiEvent in Events.OrderBy(x => x.Step))
+    {
+        <MudExpansionPanel>
+            <TitleContent>
+                <MudText Typo="Typo.h6">@uiEvent.Name</MudText>
+            </TitleContent>
+            <ChildContent>
+                @if (uiEvent is GetClickEventDto clickEvent)
+                {
+                    <EventField FieldTitle="Event Type">Click Event</EventField>
+
+                }
+                @if (uiEvent is GetWaitEventDto waitEvent)
+                {
+                    <EventField FieldTitle="Event Type">Wait Event</EventField>
+                    <EventField FieldTitle="Ticks">@waitEvent.Ticks</EventField>
+                }
+                else if (uiEvent is GetWriteEventDto writeEvent)
+                {
+                    <EventField FieldTitle="Event Type">Write Event</EventField>
+                    <div class="mb-5">
+                        <MudCheckBox @bind-Checked="@writeEvent.GenerateUnique"
+                                     Label="Generate Unique Input"
+                                     Color="Color.Primary"
+                                     ReadOnly="true" />
+                    </div>
+                    <EventField FieldTitle="Input">@writeEvent.Input</EventField>
+                }
+                else if (uiEvent is GetMoveToUIElementEventDto moveToUIElementEvent)
+                {
+                   <EventField FieldTitle="Event Type">Move to UI Element Event</EventField>
+                }
+                else if (uiEvent is GetClickAtPositionEventDto clickAtPositionEvent)
+                {
+                    <EventField FieldTitle="Event Type">Click At Position</EventField>
+                }
+                else if (uiEvent is GetMoveByOffsetEventDto moveByOffsetEvent)
+                {
+                    <EventField FieldTitle="Event Type">Move By Offset</EventField>
+                    <EventField FieldTitle="Offset X">@moveByOffsetEvent.OffsetX</EventField>
+                    <EventField FieldTitle="Offset Y">@moveByOffsetEvent.OffsetY</EventField>
+                }
+                else if (uiEvent is GetClearContentEventDto)
+                {
+                    <EventField FieldTitle="Event Type">Clear Content</EventField>
+                }
+                else if (uiEvent is GetImportFileEventDto importFileEvent)
+                {
+                    <EventField FieldTitle="Event Type">File Import</EventField>
+                    <EventField FieldTitle="File">@importFileEvent.UserFile.FileName</EventField>
+                }
+
+                @if (uiEvent is GetUIElementEventDto uiElementEvent)
+                {
+                    <div class="d-flex justify-start">
+                        <div class="mr-5">
+                            <EventField FieldTitle="Page">@uiElementEvent.UIElement.Page.Name</EventField>
+                        </div>
+                        <EventField FieldTitle="UIElement">@uiElementEvent.UIElement.Name</EventField>
+                    </div>
+                    <div class="mb-5">
+                        <MudCheckBox @bind-Checked="@uiElementEvent.UseDefaultWaitForUIElement"
+                                     Label="Use Default Wait For UI Element"
+                                     Color="Color.Primary"
+                                     ReadOnly="true" />
+                    </div>
+                    <EventField FieldTitle="Wait for UI Element">@uiElementEvent.WaitForUIElement</EventField>        
+                } 
+            </ChildContent>
+
+        </MudExpansionPanel>
+    }
+</MudExpansionPanels>

@@ -1,0 +1,48 @@
+﻿@inherits LayoutComponentBase
+
+<MudThemeProvider />
+<MudDialogProvider />
+<MudSnackbarProvider />
+
+<MudLayout>
+    <MudAppBar Elevation="25">
+        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => TogglDrawer())" />
+        <MudHidden Breakpoint="Breakpoint.SmAndUp" Invert="true">
+            <MudText Typo="Typo.h5" Class="mudblazor-appbar-brand-text">Test Framework</MudText>
+        </MudHidden>
+        <MudAppBarSpacer />
+        <MudAppBarSpacer />
+        <MudHidden Breakpoint="Breakpoint.MdAndUp" Invert="true">
+            <MudDivider Vertical="true" FlexItem="true" DividerType="DividerType.Middle" Class="mx-4 my-5" />
+            <MudTooltip Text="GitHub repository">
+                <MudIconButton Icon="@Icons.Custom.Brands.GitHub" Color="Color.Inherit" Link="https://github.com/DavidStahl97/HomeCloud" Target="_blank" />
+            </MudTooltip>
+        </MudHidden>
+    </MudAppBar>
+
+    <MudDrawer @bind-Open="@open" Elevation="0" Variant="@DrawerVariant.Temporary">
+        <MudDrawerHeader>
+            <MudText Typo="Typo.h6">Test Framework</MudText>
+        </MudDrawerHeader>
+        <NavMenu/>
+    </MudDrawer>
+
+    <MudMainContent Class="mudblazor-main-content d-flex">
+        @*<MudGrid Style="max-width: 100px;
+                        border: #3F51B5;
+                        border-radius: 3px"
+                 Class="mt-10 flex-grow-0">
+            <p>Test123</p>
+            <p>Test123</p>
+        </MudGrid>*@
+        <MudContainer Class="flex-grow-1">
+            <MudPaper Elevation="3" Class="pa-5 mt-10 mb-10">
+                @Body
+            </MudPaper>
+        </MudContainer>
+        <MudScrollToTop TopOffset="400">
+            <MudFab Icon="@Icons.Material.Filled.KeyboardArrowUp" Color="Color.Primary" />
+        </MudScrollToTop>
+    </MudMainContent>
+
+</MudLayout>

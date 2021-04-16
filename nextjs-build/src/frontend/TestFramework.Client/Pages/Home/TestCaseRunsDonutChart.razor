@@ -1,0 +1,14 @@
+﻿<MudText Typo="Typo.h4"
+         Class="mb-3">Test Cases</MudText>
+
+<MudChart ChartType="ChartType.Donut"
+          Width="300px"
+          Height="300px"
+          InputData="_data"
+          InputLabels="_labels"
+          LegendPosition="Position.Right"
+          ChartOptions="_chartOptions" />
+
+<MudDateRangePicker Label="Selected Days"
+                    DateRangeChanged="UpdateStates"
+                    DateRange="_dateRange"/>

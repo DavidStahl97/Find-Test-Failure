@@ -1,0 +1,1 @@
+docker build -t davidstahl97/testwebapp -f tests/TestFramework.TestWebApp/Dockerfile .

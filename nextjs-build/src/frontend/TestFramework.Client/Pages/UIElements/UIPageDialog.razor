@@ -1,0 +1,19 @@
+﻿@using TestFramework.Client.WebAPI
+
+<MudDialog>
+    <DialogContent>
+        <DirectValidationForm @bind-IsValid="@_isValidForm"
+                              Class="ma-5"
+                              @ref="_form">
+            <MudTextField Label="Name"
+                          Class="mb-5"
+                          Validation="_nameValidator.Validation"
+                          @bind-Value="UIPage.Name" />
+        </DirectValidationForm>
+    </DialogContent>
+    <DialogActions>
+        <MudButton Color="Color.Primary"
+                   OnClick="ClickEvent"
+                   Disabled="@(_isValidForm == false)">@EventName</MudButton>
+    </DialogActions>
+</MudDialog>

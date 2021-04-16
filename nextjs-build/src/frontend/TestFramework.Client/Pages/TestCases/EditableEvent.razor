@@ -1,0 +1,110 @@
+﻿@using TestFramework.Client.Pages.TestCases.EditEvents
+@using TestFramework.Client.WebAPI
+
+<MudPaper Elevation="3"
+          Class="pa-7 mt-7">
+    <div class="d-flex align-start">
+        <div style="max-width: 50px"
+             class="d-flex align-start flex-column ml-n4">
+            <MudIconButton Icon="@Icons.Material.Filled.ArrowUpward"
+                           Class="mb-auto"
+                           Disabled="Item.Index == 0"
+                           OnClick="() => OnMoveEventTop.InvokeAsync(Item.Index)" />
+            <MudIconButton Icon="@Icons.Material.Filled.ArrowDownward"
+                           Disabled="Item.Index == EventCount - 1"
+                           OnClick="() => OnMoveEventBottom.InvokeAsync(Item.Index)" />
+        </div>
+        <div class="flex-grow-1">
+            <div class="d-flex justify-space-between">
+                <MudSelect T="EditEvent"
+                           Label="Event Typ"
+                           @bind-Value="Item.EditEvent"
+                           ToStringFunc="x => x?.EditType"
+                           Class="ml-3 mb-5"
+                           Style="max-width: 400px">
+                    @foreach (var eventType in _possableEvents)
+                    {
+                        <MudSelectItem Value="eventType"
+                                       T="EditEvent">
+                            @(eventType.EditType)
+                        </MudSelectItem>
+                    }
+                </MudSelect>
+
+                <div />
+
+                <MudIconButton Icon="@Icons.Material.Filled.Delete"
+                               OnClick="() => OnDeleteEvent.InvokeAsync(Item.Index)" />
+            </div>
+
+            <MudTextField @bind-Value="Item.EditEvent.Name"
+                          Validation="_nameValidation.Validation"
+                          Label="Name"
+                          Class="ml-3 mb-5" />
+
+            @if (Item.EditEvent is EditWriteEvent writeEvent)
+            {
+                <div class="mb-5">
+                    <MudCheckBox @bind-Checked="@writeEvent.GenerateUnique"
+                                 Label="Generate Unique Input"
+                                 Color="Color.Primary" />
+                </div>
+                <MudTextField @bind-Value="writeEvent.Input"
+                              Label="Input"
+                              Validation="_inputValidation.Validation"
+                              Class="ml-3 mb-5"
+                              Disabled="writeEvent.GenerateUnique" />
+            }
+            else if (Item.EditEvent is EditWaitEvent waitEvent)
+            {
+                <MudTextField @bind-Value="waitEvent.Ticks"
+                              Label="Ticks"
+                              Class="ml-3 mb-5" />
+            }
+            else if (Item.EditEvent is EditMoveByOffsetEvent moveByOffsetEvent)
+            {
+                <MudTextField @bind-Value="moveByOffsetEvent.OffsetX"
+                              Label="Offset X"
+                              Class="ml-3 mb-5" />
+
+                <MudTextField @bind-Value="moveByOffsetEvent.OffsetY"
+                              Label="Offset Y"
+                              Class="ml-3 mb-5" />
+            }
+            else if (Item.EditEvent is EditImportFileEvent importFileEvent)
+            {
+                <MudSelect T="GetUserFileDto"
+                           @bind-Value="importFileEvent.UserFile"
+                           ToStringFunc="x => x?.FileName"
+                           Label="File"
+                           Class="ml-3 mb-5">
+                    @foreach (var uiElement in AllUserFiles)
+                    {
+                        <MudSelectItem T="GetUserFileDto"
+                                       Value="uiElement">
+                            @(@uiElement.FileName)
+                        </MudSelectItem>
+                    }
+                </MudSelect>
+            }
+
+            @if (Item.EditEvent is EditUIElementEvent uiElementEvent)
+            {
+                <div class="ml-3 mb-5">
+                    <SelectUIElement Selected="uiElementEvent.SelectedUIElement"
+                                     Pages="AllPages" />
+                </div>
+                <div class="mb-5">
+                    <MudCheckBox @bind-Checked="@uiElementEvent.UseDefaultWaitForUIElement"
+                                 Label="Use Default Wait For UI Element"
+                                 Color="Color.Primary" />
+                </div>
+                <MudTextField @bind-Value="uiElementEvent.WaitForUIElement"
+                              Label="Wait for UI Element"
+                              Class="ml-3 mb-5"
+                              Disabled="uiElementEvent.UseDefaultWaitForUIElement" />
+            }
+
+        </div>
+    </div>
+</MudPaper>

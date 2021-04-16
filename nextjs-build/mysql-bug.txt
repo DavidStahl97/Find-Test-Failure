@@ -1,0 +1,59 @@
+2021-04-07 07:52:00+00:00 [Note] [Entrypoint]: Entrypoint script for MySQL Server 8.0.23-1debian10 started.
+2021-04-07 07:52:01+00:00 [Note] [Entrypoint]: Switching to dedicated user 'mysql'
+2021-04-07 07:52:01+00:00 [Note] [Entrypoint]: Entrypoint script for MySQL Server 8.0.23-1debian10 started.
+2021-04-07T07:52:02.671200Z 0 [System] [MY-010116] [Server] /usr/sbin/mysqld (mysqld 8.0.23) starting as process 1
+2021-04-07T07:52:02.709945Z 0 [Warning] [MY-010159] [Server] Setting lower_case_table_names=2 because file system for /var/lib/mysql/ is case insensitive
+2021-04-07T07:52:02.798473Z 1 [System] [MY-013576] [InnoDB] InnoDB initialization has started.
+2021-04-07T07:52:12.852382Z 1 [System] [MY-013577] [InnoDB] InnoDB initialization has ended.
+2021-04-07T07:52:14.011249Z 0 [System] [MY-011323] [Server] X Plugin ready for connections. Bind-address: '::' port: 33060, socket: /var/run/mysqld/mysqlx.sock
+2021-04-07T07:52:14.102481Z 0 [System] [MY-010229] [Server] Starting XA crash recovery...
+2021-04-07T07:52:14.118845Z 0 [System] [MY-010232] [Server] XA crash recovery finished.
+2021-04-07T07:52:14.283672Z 0 [Warning] [MY-010068] [Server] CA certificate ca.pem is self signed.
+2021-04-07T07:52:14.286452Z 0 [System] [MY-013602] [Server] Channel mysql_main configured to support TLS. Encrypted connections are now supported for this channel.
+2021-04-07T07:52:14.350353Z 0 [Warning] [MY-011810] [Server] Insecure configuration for --pid-file: Location '/var/run/mysqld' in the path is accessible to all OS users. Consider choosing a different directory.
+2021-04-07T07:52:14.495920Z 0 [System] [MY-010931] [Server] /usr/sbin/mysqld: ready for connections. Version: '8.0.23'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server - GPL.
+2021-04-07T07:52:15.170245Z 0 [ERROR] [MY-013183] [InnoDB] Assertion failure: dict0dict.cc:3342:for_table || ref_table thread 140109651359488
+InnoDB: We intentionally generate a memory trap.
+InnoDB: Submit a detailed bug report to http://bugs.mysql.com.
+InnoDB: If you get repeated assertion failures or crashes, even
+InnoDB: immediately after the mysqld startup, there may be
+InnoDB: corruption in the InnoDB tablespace. Please refer to
+InnoDB: http://dev.mysql.com/doc/refman/8.0/en/forcing-innodb-recovery.html
+InnoDB: about forcing recovery.
+07:52:15 UTC - mysqld got signal 6 ;
+Most likely, you have hit a bug, but this error can also be caused by malfunctioning hardware.
+Thread pointer: 0x7f6dac000b20
+Attempting backtrace. You can use the following information to find out
+where mysqld died. If you see no messages after this, something went
+terribly wrong...
+stack_bottom = 7f6dd1ffabb8 thread_stack 0x46000
+/usr/sbin/mysqld(my_print_stacktrace(unsigned char const*, unsigned long)+0x2e) [0x5571db61839e]
+/usr/sbin/mysqld(handle_fatal_signal+0x31b) [0x5571da9d222b]
+/lib/x86_64-linux-gnu/libpthread.so.0(+0x12730) [0x7f6e136db730]
+/lib/x86_64-linux-gnu/libc.so.6(gsignal+0x10b) [0x7f6e12db87bb]
+/lib/x86_64-linux-gnu/libc.so.6(abort+0x121) [0x7f6e12da3535]
+/usr/sbin/mysqld(+0x35624d3) [0x5571dbad64d3]
+/usr/sbin/mysqld(dict_foreign_add_to_cache(dict_foreign_t*, char const**, bool, bool, dict_err_ignore_t)+0x350) [0x5571db76ac00]
+/usr/sbin/mysqld(dd_table_load_fk_from_dd(dict_table_t*, dd::Table const*, char const**, dict_err_ignore_t, bool)+0x4ec) [0x5571db74e24c]
+/usr/sbin/mysqld(dd_table_load_fk(dd::cache::Dictionary_client*, char const*, char const**, dict_table_t*, dd::Table const*, THD*, bool, bool, std::deque<char const*, ut_allocator<char const*> >*)+0x68) [0x5571db74fa58]
+/usr/sbin/mysqld(dict_table_t* dd_open_table_one<dd::Table>(dd::cache::Dictionary_client*, TABLE const*, char const*, dd::Table const*, THD*, std::deque<char const*, ut_allocator<char const*> >&)+0x1ae0) [0x5571db751610]
+/usr/sbin/mysqld(dict_table_t* dd_open_table<dd::Table>(dd::cache::Dictionary_client*, TABLE const*, char const*, dd::Table const*, THD*)+0xb4) [0x5571db752604]
+/usr/sbin/mysqld(dd_table_open_on_dd_obj(THD*, dd::cache::Dictionary_client*, dd::Table const&, dd::Partition const*, char const*, dict_table_t*&, TABLE const*)+0x8a0) [0x5571db754ed0]
+/usr/sbin/mysqld(+0x31e1425) [0x5571db755425]
+/usr/sbin/mysqld(dd_table_open_on_id(unsigned long, THD*, MDL_ticket**, bool, bool)+0xaa1) [0x5571db756391]
+/usr/sbin/mysqld(row_purge_step(que_thr_t*)+0x3ba) [0x5571dba310ca]
+/usr/sbin/mysqld(que_run_threads(que_thr_t*)+0xa68) [0x5571db9cf6f8]
+/usr/sbin/mysqld(trx_purge(unsigned long, unsigned long, bool)+0x26b) [0x5571dbaa38fb]
+/usr/sbin/mysqld(srv_purge_coordinator_thread()+0x57a) [0x5571dba717ba]
+/usr/sbin/mysqld(std::thread::_State_impl<std::thread::_Invoker<std::tuple<Runnable, void (*)()> > >::_M_run()+0xa5) [0x5571db7f6705]
+/usr/lib/x86_64-linux-gnu/libstdc++.so.6(+0xbbb2f) [0x7f6e1319cb2f]
+/lib/x86_64-linux-gnu/libpthread.so.0(+0x7fa3) [0x7f6e136d0fa3]
+/lib/x86_64-linux-gnu/libc.so.6(clone+0x3f) [0x7f6e12e7a4cf]
+
+Trying to get some variables.
+Some pointers may be invalid and cause the dump to abort.
+Query (0): Connection ID (thread ID): 0
+Status: NOT_KILLED
+
+The manual page at http://dev.mysql.com/doc/mysql/en/crashing.html contains
+information that should help you find out what is causing the crash.

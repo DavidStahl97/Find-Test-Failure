@@ -1,0 +1,53 @@
+﻿@page "/uipages/{PageId:int}"
+
+<div class="d-flex justify-space-between mb-3">
+    <MudText Typo="Typo.h5">@(_details is null ? string.Empty : _details.Name)</MudText>
+
+    <MudButton Variant="Variant.Filled"
+               Color="Color.Primary"
+               Size="Size.Small"
+               OnClick="AddUIElement">Create</MudButton>
+</div>
+
+<TablePagination SearchFunction="Search"
+                 @ref="_pagination"
+                 ShowSearch="true">
+    <ColumnGroup>
+        <col style="width:200px;" />
+        <col style="width:150px;" />
+        <col />
+        <col style="width:100px;" />
+        <col style="width:100px;" />
+    </ColumnGroup>
+    <Header>
+        <MudTh>Name</MudTh>
+        <MudTh>Method</MudTh>
+        <MudTh>Find By</MudTh>
+        <MudTh>Edit</MudTh>
+        <MudTh>Remove</MudTh>
+    </Header>
+    <RowTemplate Context="uiElement">
+        <MudTd>@uiElement.Name</MudTd>
+        <MudTd>@uiElement.FindByMethod</MudTd>
+        <MudTd>@uiElement.FindBy</MudTd>
+        <MudTh>
+            <MudIconButton Icon="@Icons.Material.Filled.Edit"
+                           OnClick="@(() => EditUIElement(uiElement))" />
+        </MudTh>
+        <MudTd>
+            <MudIconButton Icon="@Icons.Material.Filled.Delete"
+                           OnClick="@(() => DeleteUIElement(uiElement))" />
+        </MudTd>
+    </RowTemplate>
+    <SkeletonRow>
+        <SkeletonCell Width="150"/>
+        <SkeletonCell Width="100"/>
+        <SkeletonCell Width="150"/>
+        <MudTh>
+            <MudIconButton Icon="@Icons.Material.Filled.Edit"/>
+        </MudTh>
+        <MudTd>
+            <MudIconButton Icon="@Icons.Material.Filled.Delete"/>
+        </MudTd>
+    </SkeletonRow>
+</TablePagination>

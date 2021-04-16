@@ -1,0 +1,22 @@
+{
+    "value": [
+        {
+            "level": "WARNING",
+            "message": "http://host.docker.internal:5000/_framework/blazor.webassembly.js 0:9804 \"Log Warning\"",
+            "source": "console-api",
+            "timestamp": 1618391826681
+        },
+        {
+            "level": "SEVERE",
+            "message": "http://host.docker.internal:5000/_framework/blazor.webassembly.js 0:9804 \"Log Error\"",
+            "source": "console-api",
+            "timestamp": 1618391826682
+        },
+      {
+        "level": "SEVERE",
+        "message": "http://host.docker.internal:5000/_framework/blazor.webassembly.js 0:38060",
+        "source": "console-api",
+        "timestamp": 1618391826720
+      }
+    ]
+}

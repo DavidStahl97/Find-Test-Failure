@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+    <PackageReference Include="FluentValidation" Version="10.0.2" />
+    <PackageReference Include="MediatR" Version="9.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="5.0.0" />
+    <PackageReference Include="OneOf" Version="3.0.178" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\TestFramework.Contract\TestFramework.Contract.csproj" />
+    <ProjectReference Include="..\..\TestFramework.Utils\TestFramework.Utils.csproj" />
+    <ProjectReference Include="..\TestFramework.Domain\TestFramework.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

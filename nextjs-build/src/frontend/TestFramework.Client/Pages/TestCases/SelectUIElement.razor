@@ -1,0 +1,33 @@
+﻿@using TestFramework.Client.WebAPI 
+
+<div class="d-flex justify-start">
+    <MudSelect T="GetAllPageDto"
+               @bind-Value="Selected.Page"
+               Class="mr-5"
+               Label="Page"
+               ToStringFunc="x => x?.Name">
+        @foreach (var page in Pages)
+        {
+            <MudSelectItem T="GetAllPageDto" 
+                           Value="page">
+                @(page.Name)
+            </MudSelectItem>
+        }
+    </MudSelect>
+
+    <MudSelect T="GetAllUIElementDto"
+               @bind-Value="Selected.UIElement"               
+               Label="UI Element"
+               ToStringFunc="x => x?.Name">
+        @if (Selected.Page is null == false)
+        {
+            @foreach (var uiElement in Selected.Page.UIElements)
+            {
+                <MudSelectItem T="GetAllUIElementDto" 
+                               Value="uiElement">
+                    @(@uiElement.Name)
+                </MudSelectItem>
+            }        
+        }
+    </MudSelect>
+</div>
